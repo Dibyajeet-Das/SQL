@@ -55,7 +55,18 @@ Select * from employees where hire_date Is NUll;
 Select * From employees where hire_date IS NOT NULL;
 
 -- Using Update And delete  --
+SET SQL_SAFE_UPDATES = 0;
+UPDATE employees
+SET hourly_date = 45.20,
+    hire_date = '2022-04-21'
+WHERE employee_id = 5; -- if we will not mention this this effect the all the rows --
+SET SQL_SAFE_UPDATES = 1;
 
+-- if we want to delete the whole the data --
+delete from employees
+WHERE employee_id = 5; -- it is recommended to use the the where clause to delte the particular value --
+
+select * From employees;
 
 
 
