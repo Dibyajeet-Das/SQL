@@ -65,9 +65,66 @@ SET SQL_SAFE_UPDATES = 1;
 -- if we want to delete the whole the data --
 delete from employees
 WHERE employee_id = 5; -- it is recommended to use the the where clause to delte the particular value --
-
 select * From employees;
+create table test(
+   my_date DATE,
+   my_time TIME,
+   my_dateTime datetime
+);
+select * from test;
 
+Insert into test 
+-- TO SAVE THE CURRENT DATE AND TIME --
+-- VALUES(CURRENT_DATE(),CURRENT_TIME(),NOW()); --
+-- We can add and substract through which we can add previous date or the upcoming date both for date and time--
+VALUES(CURRENT_DATE() + 1,CURRENT_TIME() + 1,NOW() + 1);
+
+-- uniquie constrant , all values in the column must be different we can add this constraint -- 
+-- when we create a table or after the table is created --
+CREATE table product(
+    product_id INT,
+    product_name VARCHAR(15) UNIQUE,
+    product_price INT
+);
+-- if we forget to add the uniquie constarint we can add it later to the table --
+Alter table product
+ADD constraint
+unique(product_id);
+
+INSERT INTO product 
+values (1, "Soda", 2.5),
+       (2, "Ice Cream", 14.5),
+       (3, "Chips", 10.00);
+SELECT * FROM product;
+
+-- NOT NULL constarint here we add the constraint so that the value will not be null --
+-- we can add at the end of the names of the table we are creating --
+-- another way to add if our table is already created --
+Alter Table Product
+modify product_id INT NOT NULL;
+
+
+-- Check --
+-- check is a constarint that used to limit the value of range we are adding in our table --
+-- if add it in a column it will allow only Specific values --
+CREATE Table School (
+  studemt_id INT,
+  Student_name VARCHAR(25),
+  Student_marks INT,
+  Constraint Check_Mark CHECK(Student_marks >= 100)
+);
+-- Similarly if the table is present we can add in this manner --
+-- ALTER Table School--
+-- ADD CONSTRAINT Check_Mark CHECK(Student_marks >= 100)--
+-- Remove it Then --
+-- Alter Table School --
+-- Drop CHECK Check_Mark; --
+
+-- Default write the default value for any column when cretaing a table or after table is --
+-- is created you can add specify the thinks to add and the rest of the values will be addedd --
+-- automatically by default --
+-- Alter Table School --
+-- Alter Student_marks SET Default 0; --
 
 
 
