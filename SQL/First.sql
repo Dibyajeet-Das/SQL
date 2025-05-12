@@ -28,7 +28,7 @@ ALTER TABLE employees RENAME COLUMN Phone_Number to Email;
 ALTER Table Employees MODIFY Column email varchar(100);
 -- we can aslo move our column from one place to another --
 Alter Table employees MODIFY email varchar(100) after last_name;
--- we can aslo to the first postion only mentioning First in the modify --
+-- we can aslo add the new value to the first postion only mentioning First in the modify --
 alter table employees MODIFY email varchar(100) First;
 -- Simply we can remove the column --
 Alter Table employees Drop Column email;
@@ -125,6 +125,25 @@ CREATE Table School (
 -- automatically by default --
 -- Alter Table School --
 -- Alter Student_marks SET Default 0; --
+-- DISTINCT helps to retreive uniquie value no duplicate value
+SELECT DISTINCT CITY FROM STATION WHERE ID % 2 = 0;
+
+-- PRIMARYKEY CONSTRAINT --
+-- this can applied to a column which will both uniquie and not null --
+-- typically used as an uniquie identifier --
+-- a Table can have one primary Key constarint --
+CREATE TABLE transactions (
+   transaction_id INT PRIMARY KEY,
+   amount DECIMAL(4, 2)
+);
+
+ALTER TABLE transactions
+ADD constraint
+PRIMARY KEY(transaction_id);
+
+INSERT INTO transactions VALUE(1002, 9.55);
+SELECT amount FROM transactions WHERE transaction_id = '1001';
+SELECT * FROM transactions;
 
 
 
