@@ -126,6 +126,32 @@ CREATE Table School (
 -- Alter Table School --
 -- Alter Student_marks SET Default 0; --
 
+-- Auto_Increment is a keyword which automatically generates the uniquie and --
+-- sequentially increasing the value when new rows are being inserted --
+-- it can only applied to the column that is set as a key --
+create table transaction (
+    transaction_id INT PRIMARY KEY AUTO_INCREMENT,
+    amount decimal(5, 2)
+);
+select * from transaction;
+INSERT into transaction(amount) values (9.50);
+
+
+-- FOREIGN KEY -> Using a Foreign key we can provide link between two tables 
+-- 
+Create Table Customers (
+    customer_id INT Primary Key AUTO_INCREMENT,
+    first_name VARCHAR(50),
+    last_name VARCHAR(50)
+);
+
+Select * from Customers;
+INSERT into Customers(first_name, last_name)
+values("Mike" , "Tylor"),
+	   ("Alex" , "Mercer"),
+       ("Jhon" , "Korner");
+
+
 
 
 
