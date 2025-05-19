@@ -187,3 +187,17 @@ ON Transactions.customer_id = Customers.customer_id;
 SELECT transaction_id, amount, first_name, last_name
 from Transactions INNER JOIN Customers
 on Transactions.customer_id = Customers.customer_id;
+
+-- Left Join it will return all records from the left table, and the matching 
+-- record form the right table the result will come as 0 if no matching 
+-- records are found 
+-- As we can see all record will be displayed even the null value will also get displayed
+SELECT transaction_id, amount, first_name, last_name
+from Transactions LEFT JOIN Customers
+on Transactions.customer_id = Customers.customer_id;
+-- Similar think will be done with the right join --
+SELECT transaction_id, amount, first_name, last_name
+from Transactions RIGHT JOIN Customers
+on Transactions.customer_id = Customers.customer_id;
+
+-- Functions in My SQL -- 
