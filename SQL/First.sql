@@ -102,8 +102,6 @@ SELECT * FROM product;
 -- another way to add if our table is already created --
 Alter Table Product
 modify product_id INT NOT NULL;
-
-
 -- Check --
 -- check is a constarint that used to limit the value of range we are adding in our table --
 -- if add it in a column it will allow only Specific values --
@@ -136,8 +134,10 @@ create table transaction (
 select * from transaction;
 INSERT into transaction(amount) values (9.50);
 
-
 -- FOREIGN KEY -> Using a Foreign key we can provide link between two tables 
+-- A foreign key is the field in one table that refers to the primary key of
+-- other table. The Table with the foreign key is called as CHild table
+-- and table with primary is called as referenced
 -- 
 Create Table Customers (
     customer_id INT Primary Key AUTO_INCREMENT,
@@ -150,8 +150,40 @@ INSERT into Customers(first_name, last_name)
 values("Mike" , "Tylor"),
 	   ("Alex" , "Mercer"),
        ("Jhon" , "Korner");
+-- Creating a link between the customer table and the transaction Table
+Create Table Transactions (
+     transaction_id INT Primary Key Auto_Increment,
+     amount Decimal(5, 2),
+     customer_id Int,
+     Foreign Key(customer_id)references Customers(customer_id) 
+);
+Select * From Transactions;
+-- To Drop the foreign key we can use --
+Alter Table Transactions
+Drop FOREIGN KEY transactions_ibfk_1;
+
+-- To Add The foreign key in the table --
+Alter Table Transactions 
+Add Constraint fk_Customer_id
+foreign key (customer_id) references Customers(customer_id);
 
 
+select * from Transactions;
+insert Into Transactions (amount, customer_id)
+value(4.99, 3),
+     (2.42, 3),
+     (1.71, 3),
+     (3.33, NUll);
 
-
-
+-- JOIN Clause --
+-- A JOin is clause which is used to combine rows from two or more tables --
+-- INNER JOIN --
+-- The INNERJOIN Keyword selects record that have matching values --
+-- we can aslo use Join Keyword same as Inner Join -- 
+SELECT * FROM
+Transactions INNER JOIN Customers
+ON Transactions.customer_id = Customers.customer_id;
+-- Joining any matching row based on some link --
+SELECT transaction_id, amount, first_name, last_name
+from Transactions INNER JOIN Customers
+on Transactions.customer_id = Customers.customer_id;
