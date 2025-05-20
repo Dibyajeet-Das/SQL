@@ -201,3 +201,13 @@ from Transactions RIGHT JOIN Customers
 on Transactions.customer_id = Customers.customer_id;
 
 -- Functions in My SQL -- 
+-- A function is a stored Program that is used to pass the parameter --
+-- There are a alot of functions some of them are --
+SELECT COUNT(amount) AS count FROM Transactions; -- we can also add the where clause --
+-- we are using AS it helping to make our output look more good in look --
+SELECT MAX(amount) AS "Maximum Amount" FROM Transactions;
+SELECT MIN(amount) AS "Minimum Amount" FROM Transactions;
+SELECT AVG(amount) AS average FROM Transactions;
+SELECT SUM(amount) AS sum FROM Transactions;
+SELECT CONCAT(first_name," ",last_name) AS "Full Name"
+From Customers; -- Adding The Value -- 
