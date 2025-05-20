@@ -211,3 +211,39 @@ SELECT AVG(amount) AS average FROM Transactions;
 SELECT SUM(amount) AS sum FROM Transactions;
 SELECT CONCAT(first_name," ",last_name) AS "Full Name"
 From Customers; -- Adding The Value -- 
+
+-- AND,OR and Not (Using logical operator to get the value) --
+CREATE TABLE DEMO (
+     Customer_id INT,
+     first_name VARCHAR(50),
+     last_name VARCHAR(50),
+     Address VARCHAR(50),
+     City VARCHAR(50),
+     POstal_Code INT,
+     Country VARCHAR(50)
+);
+Select * From Demo;
+Insert INTO Demo
+Value (1,"Alfreds", "Futterkiste","Obere Str. 57","Berlin",12209,"Germany"),
+      (2,"Ana Trujillo","Emparedados y helados","Avda. de la Constitución 2222","México D.F.",05021,"Mexico"),
+	  (3,"Antonio Moreno", "Taquería","Mataderos 2312","México D.F.",05023,"Mexico"),
+      (4,"Thomas", "Hardy","120 Hanover Sq.","London",68306,"UK"),
+      (5,"Christina", "Berglund","Berguvsvägen 8","Luleå",95822,"Sweden"),
+      (6,"Elizabeth", "Lincoln","23 Tsawassen Blvd.","Tsawassen",1010,"Argentina"),
+      (7,"Francisco", "Chang","Sierras de Granada 9993","México D.F",05022,"Mexico"); 
+-- Using AND Logical --
+-- When both the conditons are true then only the value will get execeuted-- 
+Select * From Demo where City = "México D.F." AND Country = "Mexico";
+-- Using OR Logical -- 
+-- where only one condition needs to true --
+-- where we can check more than one condtion should be true --
+Select * From Demo where  City = "Berlin" OR City = "Mexico";
+-- Using Not --
+ Select * From Demo where NOT City = "Berlin" AND NOT Country = "Mexico";
+ -- Between is used where starting and ending value is defined --
+ -- The Between OPerator Selects value withina given range
+ Select * From Demo where Customer_id BETWEEN 1 AND 4;
+ -- IN Operator --
+ -- The IN Operator allows you to specify multiple values in a WHERE clause --
+ -- The IN Operator is a Shorthand for multiple Or Conditions -- 
+ Select * From Demo WHERE City IN ("Berlin","London");
