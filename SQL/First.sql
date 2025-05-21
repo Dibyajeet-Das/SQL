@@ -247,3 +247,39 @@ Select * From Demo where  City = "Berlin" OR City = "Mexico";
  -- The IN Operator allows you to specify multiple values in a WHERE clause --
  -- The IN Operator is a Shorthand for multiple Or Conditions -- 
  Select * From Demo WHERE City IN ("Berlin","London");
+ 
+ --  Wild Cards in My SQL % _--
+ -- Used to Substitute one or more Characters in a String  --
+ -- % in a letter helps to find any number of random characters --
+ -- we will use LIke keyword instead of the "=" sign to find the character --
+ SELECT * FROM Demo;
+ SELECT * FROM Demo WHERE first_name LIKE "a%";
+ -- Here we are finding the last letter --
+ SELECT * FROM Demo WHERE last_name LIKE "%o";
+ -- The underscore wild card represents only one letter --
+ -- Filling the gaps --
+ SELECT * FROM Demo WHERE Country LIKE "_exico";
+ SELECT * FROM Demo WHERE POstal_Code LIKE "502_";
+ 
+ -- Order BY Clause --
+ -- It Helps to sort the value either in ascending or descending order --
+ Select * From Demo;
+ SELECT * FROM Demo ORDER BY first_name;
+ SELECT * FROM Demo ORDER BY last_name DESC;
+ SELECT * FROM Demo ORDER BY last_name, first_name ASC;
+ 
+ -- Limit clause --
+ -- generally used in large no off data set to return the value --
+ -- limit clause is used to return the specific number of records availabe in the record  --
+ Select * From Demo Limit 3;
+ select * From Demo order by last_name desc limit 3;
+ 
+ -- UNION Operator in my sql --
+ -- Helps to Combine two or more values 
+ -- in order to join two tables they need to have same number of columns --
+ select first_name, last_name From Customers
+ UNION
+ select first_name, last_name From Demo;
+ -- we can see the combination of value 
+ -- we can use UNION ALL where all the duplicate value will also get implemented--
+ 
