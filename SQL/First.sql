@@ -283,3 +283,51 @@ Select * From Demo where  City = "Berlin" OR City = "Mexico";
  -- we can see the combination of value 
  -- we can use UNION ALL where all the duplicate value will also get implemented--
  
+ -- SELF JOINS --
+ -- Join Another copy of a table to itself --
+ -- use to compair rows of the same table --
+ -- helps to display the hierarchy of data --
+ select * from Demo;
+ alter table Demo Add Reference_id INT;
+ UPDATE Demo Set Reference_id = 4 where Customer_id = 5; 
+ 
+ select a.first_name,a.last_name,
+ CONCAT(b.first_name,b.last_name) AS "Referby" From Demo AS a
+ INNER JOIN Demo AS b
+ on a.Reference_id = b.Customer_id; 
+ 
+ 
+ -- VIEWS --
+ -- views are the virtual table made of the result set of a real table
+ -- The fields in a view are the fields of the one or more real tables in the database --
+ -- They are not real tables but they can be interacted as if they were --
+ -- with the help of this we can able to replicate the data without writing the data again --
+  -- Also remember any changes in the real table may bring change to the view table as well --
+  
+  SELECT * From Demo;
+  CREATE VIEW employee_attendance AS
+  SELECT first_name,last_name From Demo;
+  Select * From employee_attendance;
+  DROP view employee_attendance;
+  
+  
+  -- Indexes --
+  -- It is type of Btree Data Structure --
+  -- Indexes are used to find a specific values in a column more quickly --
+  -- My SQl Normally Searchs sequentially through a column --
+  -- The Longer the column the more expensive the work becomes --
+  -- Update takes more time select takes less time --
+SHOW INDEXES From Demo;
+CREATE INDEX last_nameidx
+ON Demo(last_name);
+SELECT * FROM Demo WHERE  last_name = "Hardy"; 
+-- Multi Column Index --
+CREATE INDEX last_first_nameidx
+ON Demo(first_name,last_name);
+
+Alter Table Demo
+Drop INDEX last_nameidx;
+  
+
+ 
+ 
