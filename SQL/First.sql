@@ -327,6 +327,109 @@ ON Demo(first_name,last_name);
 
 Alter Table Demo
 Drop INDEX last_nameidx;
+
+
+-- Subqueries -- 
+-- generally used a query within another query --
+ALTER Table Demo 
+add Hourly_pay varchar(50);
+
+SELECT first_name,last_name,Hourly_pay,
+(select AVG(Hourly_pay) From Demo) AS "Average"
+from Demo;
+
+Select first_name,last_name, Hourly_pay
+from Demo
+where Hourly_pay > (Select AVG(Hourly_pay)From Demo);
+
+
+-- Group BY Clause --
+-- They are Often used with the aggregated functions like max(),avg(),min()
+-- sum(),avg()
+
+-- CREATE table transaction (
+-- trasaction_id INT,
+-- amount INT,
+-- order_date INT,
+-- Customer_id INT ,
+-- Foreign Key(customer_id)references Customers(customer_id)
+-- );
+-- Insert Into transaction
+-- value (1, 5.12, '2025-01-1' , 2),
+-- 	  (2, 3.62, '2025-01-1' , 4),
+--       (3, 9.40, '2025-02-5' , 1),
+--       (4, 7.11, '2025-02-5' , 2),
+--       (5, 2.34, '2025-03-2' , 5),
+--       (6, 1.14, '2025-03-12' , 4),
+--       (7, 8.04, '2025-03-21' , 1);
+-- select * FRom transaction;
+-- alter table transaction modify column order_date DATE;
+-- truncate table transaction;
+
+SELECT SUM(amount) As "SUM", order_date
+from transaction
+Group BY order_date;
+-- Sum of every amount group by the dates --
+Select Avg(amount) AS "Avg", Customer_id
+from transaction
+Group BY Customer_id;
+
+-- Rollup extension of group by clause --
+-- produces another row and show grand total --
+-- Also called as supper aggregate caluse --
+-- use to generate additional row to display the final value --
+Select sum(amount), Customer_id 
+from transaction
+group BY Customer_id with rollup;
+
+Select count(trasaction_id), order_date
+from transaction
+group by order_date with rollup;
+
+-- ON DELETE --
+-- ON DELETE SET NULL - if foreign key deleted, replace foreign key with null
+-- ON DELETE CASCADE - when a foreign key is deleted, delete row
+
+-- Stored Procedure --
+-- a pre-compiled set of SQL statements that are stored on the server and can be executed by a single call --
+-- Increase memory usage --
+-- reduce netwrok traffic --
+-- Increase performance --
+-- Secure --
+
+DELIMITER $$
+create procedure get_customer()
+Begin 
+    Select * From Customers;
+END $$
+DELIMITER ;
+Call get_customer();
+-- DROP PROCEDURE get_customer(); -- 
+ 
+-- Triggers - when an event happens do something
+-- ex - (INSERT, UPDATE, DELETE)
+-- check data, handle errors , auditing tables --
+
+select * From transaction;
+select * from Demo;
+Alter table Demo 
+add salary VARCHAR(100);
+
+CREATE TRIGGER before_hourly_pay
+BEFORE UPDATE ON Demo
+FOR EACH ROW
+SET NEW.salary = (NEW.Hourly_pay * 2080);
+
+-- It Will show how many Triggers are created for the table --
+SHOW TRIGGERS;
+
+UPDATE Demo
+SET Hourly_pay = 50
+WHERE Customer_id = 1;
+
+SELECT * FROM Demo;
+
+  
   
 
  
