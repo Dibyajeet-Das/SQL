@@ -429,6 +429,10 @@ WHERE Customer_id = 1;
 
 SELECT * FROM Demo;
 
+-- Find the city which are not being repetead there names are starting with a,e,i,o,u
+SELECT DISTINCT CITY FROM STATION WHERE CITY LIKE 'a%' or CITY LIKE 'e%'
+or CITY LIKE 'i%' or CITY LIKE 'o%' or CITY LIKE 'u%';
+
   
   
 
